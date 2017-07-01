@@ -630,6 +630,8 @@ moc_clock.cpp: ../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidge
 		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
 		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QPixmap \
 		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
+		../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		../Clock/clock.h \
 		../../Qt5.7.1/5.7/clang_64/bin/moc
 	/Users/majing/Qt5.7.1/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/majing/Qt5.7.1/5.7/clang_64/mkspecs/macx-clang -I/Users/majing/qt/Clock -I/Users/majing/Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/majing/Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/majing/Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/majing/Qt5.7.1/5.7/clang_64/lib ../Clock/clock.h -o moc_clock.cpp
@@ -661,6 +663,8 @@ main.o: ../Clock/main.cpp ../Clock/clock.h \
 		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
 		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QPixmap \
 		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
+		../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Clock/main.cpp
@@ -676,6 +680,8 @@ clock.o: ../Clock/clock.cpp ../Clock/clock.h \
 		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
 		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QPixmap \
 		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
+		../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/QRect \
 		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/qrect.h \
 		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
@@ -689,7 +695,11 @@ clock.o: ../Clock/clock.cpp ../Clock/clock.h \
 		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/QTime \
 		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
 		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
-		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h
+		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers/QVBoxLayout \
+		../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers/qboxlayout.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clock.o ../Clock/clock.cpp
 
 qrc_img2.o: qrc_img2.cpp 

@@ -7,6 +7,8 @@
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include <QPixmap>
+#include <QDialog>
+#include <QDialog>
 
 class Clock : public QWidget
 {

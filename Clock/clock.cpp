@@ -7,6 +7,8 @@
 #include <QtMath>
 #include <QTime>
 #include <QDebug>
+#include <QLineEdit>
+#include <QVBoxLayout>
 
 
 Clock::Clock(QWidget *parent)
@@ -28,7 +30,6 @@ void Clock::paintEvent(QPaintEvent *)
     QPen pen;
 
     timer.start(1000);
-
     connect(&timer,SIGNAL(timeout()),this,SLOT(update()));
 
     //color
