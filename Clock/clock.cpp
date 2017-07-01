@@ -7,9 +7,8 @@
 #include <QtMath>
 #include <QTime>
 #include <QDebug>
-#include <QLineEdit>
-#include <QVBoxLayout>
-
+#include <QStyleOption>
+#include <QBrush>
 
 Clock::Clock(QWidget *parent)
     : QWidget(parent)
@@ -52,6 +51,26 @@ void Clock::paintEvent(QPaintEvent *)
 
     //remove sawtooth
     painter.setRenderHint(QPainter::Antialiasing,true);
+
+    //draw the background round
+//[1] radialGradient
+//    QRadialGradient radialGradient(-100,-100,10,-10,-10);//(Centerx,Centery,r,FocusX,FocusY)
+//    radialGradient.setColorAt(0,Qt::green);
+//    radialGradient.setColorAt(1.0,Qt::yellow);
+//    radialGradient.setColorAt(1.0,Qt::red);
+//    painter.setBrush(QBrush(radialGradient));
+//    painter.drawEllipse(QPoint(0,0),100,100);
+
+//[2] conicalgradient
+    QConicalGradient conicalGradient(0,0,45);//(CenterX,CenterY,initialDeg)
+    conicalGradient.setColorAt(0,"#800000");
+    conicalGradient.setColorAt(0.25,"#FF8000");
+    conicalGradient.setColorAt(0.5,"#fff");
+    conicalGradient.setColorAt(0.75,"#FF8000");
+    conicalGradient.setColorAt(1,"#800000");
+    painter.setBrush(QBrush(conicalGradient));
+    painter.setPen(Qt::NoPen);
+    painter.drawEllipse(QPoint(0,0),80,80);
 
     //draw the h-scale
     pen.setWidth(3);
