@@ -26,7 +26,7 @@ Dialog::Dialog(QWidget *parent) :
 
     connect(ui->infoBtn,SIGNAL(clicked(bool)),this,SLOT(infoDialogSlot()));
 
-    //connect(ui->errorBtn,SIGNAL(clicked(bool)),this,SLOT(errorDialogSlot()));
+    connect(ui->warnBtn,SIGNAL(clicked(bool)),this,SLOT(warningDialogSlot()));
 }
 
 Dialog::~Dialog()
@@ -39,20 +39,20 @@ void Dialog::colorDialogSlot()
     QColor color =QColorDialog::getColor(Qt::black,this,"get a color value");
     QFont font;
     font.setPointSize(40);
-    ui->textEdit->setFont(font);
     ui->textEdit->setTextColor(color);
-    ui->textEdit->setText(color.name());
-
-
+    ui->textEdit->setText("the selected color is->");
+    ui->textEdit->setFont(font);
+    ui->textEdit->append(color.name());
 }
 
 void Dialog::fontDialogSlot()
 {
     bool ok = false;
     QFont font = QFontDialog::getFont(&ok,this);
-    ui->textEdit->setFont(font);
+    ui->textEdit->setText("the selected font-family ");
+    ui->textEdit->append("sets successfully!");
     font.setPointSize(40);
-    ui->textEdit->setText("successfully!");
+    ui->textEdit->setFont(font);
 
 }
 
@@ -75,13 +75,20 @@ void Dialog::errorDialogSlot()
 void Dialog::infoDialogSlot()
 {
     QMessageBox::StandardButton btn;
-    btn = QMessageBox::question(this,tr("question dialog test"),tr("yes or no"),
-                                QMessageBox::Yes|QMessageBox::No);
+    btn = QMessageBox::question(this,tr("测试信息对话框"),tr("yes or no"),
+                                QMessageBox::Yes|QMessageBox::No|QMessageBox::Save);
     if(QMessageBox::Yes ==btn){
         ui->textEdit->setText(" you select yes");
+    }else {
+        ui->textEdit->setText("you select no");
     }
-    QMessageBox::information(this,tr("question dialog test"),tr("ok"),
+    QMessageBox::information(this,tr("question dialog test"),tr("i got it!~"),
                                QMessageBox::Ok);
-     QMessageBox::warning(this,tr("warning test"),tr("warning"),
-                                QMessageBox::Ok|QMessageBox::Ignore);
+
+}
+
+void Dialog::warningDialogSlot()
+{
+    QMessageBox::warning(this,tr("warning test"),tr("warning"),
+                               QMessageBox::Ok|QMessageBox::Ignore);
 }

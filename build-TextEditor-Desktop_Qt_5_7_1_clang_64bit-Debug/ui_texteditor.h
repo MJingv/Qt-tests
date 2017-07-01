@@ -36,10 +36,8 @@ public:
     QAction *actionC_ut;
     QAction *actionCopy;
     QAction *actionPatse;
-    QAction *actionAbout_2;
-    QAction *actionAbout_Qt_2;
-    QAction *actionAbout;
-    QAction *actionAS;
+    QAction *actionWhat_up;
+    QAction *actionWhat_s_your_name;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QTextEdit *textEdit;
@@ -47,6 +45,7 @@ public:
     QMenu *menuFile;
     QMenu *menuEdit;
     QMenu *menuHelp;
+    QMenu *menuOthers;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
     QToolBar *toolBar;
@@ -91,14 +90,10 @@ public:
         QIcon icon5;
         icon5.addFile(QStringLiteral(":/images/paste.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionPatse->setIcon(icon5);
-        actionAbout_2 = new QAction(TextEditor);
-        actionAbout_2->setObjectName(QStringLiteral("actionAbout_2"));
-        actionAbout_Qt_2 = new QAction(TextEditor);
-        actionAbout_Qt_2->setObjectName(QStringLiteral("actionAbout_Qt_2"));
-        actionAbout = new QAction(TextEditor);
-        actionAbout->setObjectName(QStringLiteral("actionAbout"));
-        actionAS = new QAction(TextEditor);
-        actionAS->setObjectName(QStringLiteral("actionAS"));
+        actionWhat_up = new QAction(TextEditor);
+        actionWhat_up->setObjectName(QStringLiteral("actionWhat_up"));
+        actionWhat_s_your_name = new QAction(TextEditor);
+        actionWhat_s_your_name->setObjectName(QStringLiteral("actionWhat_s_your_name"));
         centralWidget = new QWidget(TextEditor);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
@@ -121,6 +116,8 @@ public:
         menuEdit->setObjectName(QStringLiteral("menuEdit"));
         menuHelp = new QMenu(menuBar);
         menuHelp->setObjectName(QStringLiteral("menuHelp"));
+        menuOthers = new QMenu(menuBar);
+        menuOthers->setObjectName(QStringLiteral("menuOthers"));
         TextEditor->setMenuBar(menuBar);
         mainToolBar = new QToolBar(TextEditor);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -135,6 +132,7 @@ public:
         menuBar->addAction(menuFile->menuAction());
         menuBar->addAction(menuEdit->menuAction());
         menuBar->addAction(menuHelp->menuAction());
+        menuBar->addAction(menuOthers->menuAction());
         menuFile->addAction(actionN_ew);
         menuFile->addAction(actionO_pen);
         menuFile->addAction(actionS_ave);
@@ -143,8 +141,9 @@ public:
         menuEdit->addAction(actionC_ut);
         menuEdit->addAction(actionCopy);
         menuEdit->addAction(actionPatse);
-        menuHelp->addAction(actionAbout);
-        menuHelp->addAction(actionAS);
+        menuHelp->addSeparator();
+        menuOthers->addAction(actionWhat_up);
+        menuOthers->addAction(actionWhat_s_your_name);
         mainToolBar->addAction(actionN_ew);
         mainToolBar->addAction(actionO_pen);
         mainToolBar->addAction(actionS_ave);
@@ -171,13 +170,12 @@ public:
         actionC_ut->setText(QApplication::translate("TextEditor", "Cut", Q_NULLPTR));
         actionCopy->setText(QApplication::translate("TextEditor", "Copy", Q_NULLPTR));
         actionPatse->setText(QApplication::translate("TextEditor", "Paste", Q_NULLPTR));
-        actionAbout_2->setText(QApplication::translate("TextEditor", "About", Q_NULLPTR));
-        actionAbout_Qt_2->setText(QApplication::translate("TextEditor", "About Qt", Q_NULLPTR));
-        actionAbout->setText(QApplication::translate("TextEditor", "About", Q_NULLPTR));
-        actionAS->setText(QApplication::translate("TextEditor", "About Qt", Q_NULLPTR));
+        actionWhat_up->setText(QApplication::translate("TextEditor", "what' s up?", Q_NULLPTR));
+        actionWhat_s_your_name->setText(QApplication::translate("TextEditor", "what's your name?", Q_NULLPTR));
         menuFile->setTitle(QApplication::translate("TextEditor", "File", Q_NULLPTR));
         menuEdit->setTitle(QApplication::translate("TextEditor", "Edit", Q_NULLPTR));
         menuHelp->setTitle(QApplication::translate("TextEditor", "Help", Q_NULLPTR));
+        menuOthers->setTitle(QApplication::translate("TextEditor", "Others", Q_NULLPTR));
         toolBar->setWindowTitle(QApplication::translate("TextEditor", "toolBar", Q_NULLPTR));
     } // retranslateUi
 

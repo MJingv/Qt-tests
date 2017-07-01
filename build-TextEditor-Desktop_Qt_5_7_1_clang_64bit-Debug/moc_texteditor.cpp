@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_TextEditor_t {
-    QByteArrayData data[3];
-    char stringdata0[24];
+    QByteArrayData data[7];
+    char stringdata0[71];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -31,10 +31,15 @@ static const qt_meta_stringdata_TextEditor_t qt_meta_stringdata_TextEditor = {
     {
 QT_MOC_LITERAL(0, 0, 10), // "TextEditor"
 QT_MOC_LITERAL(1, 11, 11), // "openActSlot"
-QT_MOC_LITERAL(2, 23, 0) // ""
+QT_MOC_LITERAL(2, 23, 0), // ""
+QT_MOC_LITERAL(3, 24, 11), // "saveActSlot"
+QT_MOC_LITERAL(4, 36, 15), // "mousePressEvent"
+QT_MOC_LITERAL(5, 52, 12), // "QMouseEvent*"
+QT_MOC_LITERAL(6, 65, 5) // "event"
 
     },
-    "TextEditor\0openActSlot\0"
+    "TextEditor\0openActSlot\0\0saveActSlot\0"
+    "mousePressEvent\0QMouseEvent*\0event"
 };
 #undef QT_MOC_LITERAL
 
@@ -44,7 +49,7 @@ static const uint qt_meta_data_TextEditor[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -52,10 +57,14 @@ static const uint qt_meta_data_TextEditor[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   19,    2, 0x08 /* Private */,
+       1,    0,   29,    2, 0x08 /* Private */,
+       3,    0,   30,    2, 0x08 /* Private */,
+       4,    1,   31,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 5,    6,
 
        0        // eod
 };
@@ -67,10 +76,11 @@ void TextEditor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->openActSlot(); break;
+        case 1: _t->saveActSlot(); break;
+        case 2: _t->mousePressEvent((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 const QMetaObject TextEditor::staticMetaObject = {
@@ -98,13 +108,13 @@ int TextEditor::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 3)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 1;
+        _id -= 3;
     }
     return _id;
 }

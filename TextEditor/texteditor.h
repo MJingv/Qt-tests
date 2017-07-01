@@ -2,7 +2,7 @@
 #define TEXTEDITOR_H
 
 #include <QMainWindow>
-
+#include <QMouseEvent>
 namespace Ui {
 class TextEditor;
 }
@@ -16,6 +16,8 @@ public:
     ~TextEditor();
 private slots:
     void openActSlot(void);
+    void saveActSlot(void);
+
 private:
     Ui::TextEditor *ui;
 };

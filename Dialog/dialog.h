@@ -20,6 +20,7 @@ public slots:
     void inputDialogSlot(void);
     void errorDialogSlot(void);
     void infoDialogSlot(void);
+    void warningDialogSlot(void);
 
 private:
     Ui::Dialog *ui;

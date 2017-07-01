@@ -4,6 +4,9 @@
 #include <QFileDialog>
 #include <iostream>
 #include <QTextStream>
+#include <QMessageBox>
+
+
 TextEditor::TextEditor(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::TextEditor)
@@ -11,6 +14,7 @@ TextEditor::TextEditor(QWidget *parent) :
     ui->setupUi(this);
 
     connect(ui->actionO_pen,SIGNAL(triggered(bool)),this,SLOT(openActSlot()));
+    connect(ui->actionS_ave,SIGNAL(triggered(bool)),this,SLOT(saveActSlot()));
 }
 
 TextEditor::~TextEditor()
@@ -20,17 +24,44 @@ TextEditor::~TextEditor()
 
 void TextEditor::openActSlot()
 {
-    //search files from aboslute path
-    QString fileName = QFileDialog::getOpenFileName(this);
-    if(!fileName.isEmpty()){
-        QFile file(fileName);
-        if(file.open(QIODevice::ReadWrite)){
+    //search files from absolute path
+    QString path = QFileDialog::getOpenFileName(this);
+    if(!path.isEmpty()){
+        QFile file(path);
+        if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
+            QMessageBox::warning(this,tr("read file"),tr("can't open file :\n%1").arg(path));
+            return;
 
-            QTextStream in (&file);
-            ui->textEdit->setText(in.readAll());
         }
+        QTextStream in (&file);
+        ui->textEdit->setText(in.readAll());
+        file.close();
+    }else {
+        QMessageBox::warning(this,tr("path"),tr("please select a file"));
     }
-    ui->textEdit->append(fileName);
+    ui->textEdit->append(path);
+
+
+}
+
+void TextEditor::saveActSlot()
+{
+    QString path = QFileDialog::getOpenFileName(this);
+    if(!path.isEmpty())
+    {
+        QFile file(path);
+        if(!file.open(QIODevice::WriteOnly|QIODevice::Text))
+        {
+            QMessageBox::warning(this,tr("write file"),tr("can't open the file"));
+            return;
+        }
+        QTextStream out(&file);
+       out<< ui->textEdit->toPlainText();
+        file.close();
+
+    }else {
+        QMessageBox::warning(this,tr("path"),tr("please select a file"));
+    }
 
 
 }

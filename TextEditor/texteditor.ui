@@ -66,12 +66,19 @@
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="actionAbout"/>
-    <addaction name="actionAS"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menuOthers">
+    <property name="title">
+     <string>Others</string>
+    </property>
+    <addaction name="actionWhat_up"/>
+    <addaction name="actionWhat_s_your_name"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuHelp"/>
+   <addaction name="menuOthers"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -176,24 +183,14 @@
     <string>Paste</string>
    </property>
   </action>
-  <action name="actionAbout_2">
+  <action name="actionWhat_up">
    <property name="text">
-    <string>About</string>
+    <string>what' s up?</string>
    </property>
   </action>
-  <action name="actionAbout_Qt_2">
+  <action name="actionWhat_s_your_name">
    <property name="text">
-    <string>About Qt</string>
-   </property>
-  </action>
-  <action name="actionAbout">
-   <property name="text">
-    <string>About</string>
-   </property>
-  </action>
-  <action name="actionAS">
-   <property name="text">
-    <string>About Qt</string>
+    <string>what's your name?</string>
    </property>
   </action>
  </widget>
