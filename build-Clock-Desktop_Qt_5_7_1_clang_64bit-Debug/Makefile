@@ -49,9 +49,11 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../Clock/main.cpp \
-		../Clock/clock.cpp moc_clock.cpp
+		../Clock/clock.cpp qrc_img2.cpp \
+		moc_clock.cpp
 OBJECTS       = main.o \
 		clock.o \
+		qrc_img2.o \
 		moc_clock.o
 DIST          = ../../Qt5.7.1/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../Qt5.7.1/5.7/clang_64/mkspecs/qdevice.pri \
@@ -185,6 +187,7 @@ DIST          = ../../Qt5.7.1/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../Qt5.7.1/5.7/clang_64/mkspecs/features/qt_config.prf \
 		../../Qt5.7.1/5.7/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../Qt5.7.1/5.7/clang_64/mkspecs/features/spec_post.prf \
+		../Clock/.qmake.stash \
 		../../Qt5.7.1/5.7/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt5.7.1/5.7/clang_64/mkspecs/features/mac/sdk.prf \
 		../../Qt5.7.1/5.7/clang_64/mkspecs/features/toolchain.prf \
@@ -356,6 +359,7 @@ Makefile: ../Clock/Clock.pro ../../Qt5.7.1/5.7/clang_64/mkspecs/macx-clang/qmake
 		../../Qt5.7.1/5.7/clang_64/mkspecs/features/qt_config.prf \
 		../../Qt5.7.1/5.7/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../Qt5.7.1/5.7/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../Qt5.7.1/5.7/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt5.7.1/5.7/clang_64/mkspecs/features/mac/sdk.prf \
 		../../Qt5.7.1/5.7/clang_64/mkspecs/features/toolchain.prf \
@@ -382,6 +386,7 @@ Makefile: ../Clock/Clock.pro ../../Qt5.7.1/5.7/clang_64/mkspecs/macx-clang/qmake
 		../../Qt5.7.1/5.7/clang_64/mkspecs/features/yacc.prf \
 		../../Qt5.7.1/5.7/clang_64/mkspecs/features/lex.prf \
 		../Clock/Clock.pro \
+		../Clock/img2.qrc \
 		../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/QtGui.prl \
 		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/QtCore.prl
@@ -518,6 +523,7 @@ Makefile: ../Clock/Clock.pro ../../Qt5.7.1/5.7/clang_64/mkspecs/macx-clang/qmake
 ../../Qt5.7.1/5.7/clang_64/mkspecs/features/qt_config.prf:
 ../../Qt5.7.1/5.7/clang_64/mkspecs/macx-clang/qmake.conf:
 ../../Qt5.7.1/5.7/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../Qt5.7.1/5.7/clang_64/mkspecs/features/exclusive_builds.prf:
 ../../Qt5.7.1/5.7/clang_64/mkspecs/features/mac/sdk.prf:
 ../../Qt5.7.1/5.7/clang_64/mkspecs/features/toolchain.prf:
@@ -544,6 +550,7 @@ Makefile: ../Clock/Clock.pro ../../Qt5.7.1/5.7/clang_64/mkspecs/macx-clang/qmake
 ../../Qt5.7.1/5.7/clang_64/mkspecs/features/yacc.prf:
 ../../Qt5.7.1/5.7/clang_64/mkspecs/features/lex.prf:
 ../Clock/Clock.pro:
+../Clock/img2.qrc:
 ../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 ../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/QtGui.prl:
 ../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/QtCore.prl:
@@ -576,6 +583,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../Clock/img2.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../Clock/clock.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../Clock/main.cpp ../Clock/clock.cpp $(DISTDIR)/
 
@@ -587,6 +595,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r Clock.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -600,8 +609,14 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_img2.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_img2.cpp
+qrc_img2.cpp: ../Clock/img2.qrc \
+		../../Qt5.7.1/5.7/clang_64/bin/rcc \
+		../Clock/2.png
+	/Users/majing/Qt5.7.1/5.7/clang_64/bin/rcc -name img2 ../Clock/img2.qrc -o qrc_img2.cpp
+
 compiler_moc_header_make_all: moc_clock.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_clock.cpp
@@ -609,6 +624,12 @@ moc_clock.cpp: ../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidge
 		../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
 		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QPixmap \
+		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
 		../Clock/clock.h \
 		../../Qt5.7.1/5.7/clang_64/bin/moc
 	/Users/majing/Qt5.7.1/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/majing/Qt5.7.1/5.7/clang_64/mkspecs/macx-clang -I/Users/majing/qt/Clock -I/Users/majing/Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/majing/Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/majing/Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/majing/Qt5.7.1/5.7/clang_64/lib ../Clock/clock.h -o moc_clock.cpp
@@ -625,7 +646,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_header_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_header_clean 
 
 ####### Compile
 
@@ -634,6 +655,12 @@ main.o: ../Clock/main.cpp ../Clock/clock.h \
 		../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
 		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QPixmap \
+		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
 		../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Clock/main.cpp
@@ -643,11 +670,30 @@ clock.o: ../Clock/clock.cpp ../Clock/clock.h \
 		../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
 		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QPixmap \
+		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
 		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/QRect \
 		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/qrect.h \
 		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
-		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h
+		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QPen \
+		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/qpen.h \
+		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/QtMath \
+		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/qmath.h \
+		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/QTime \
+		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../Qt5.7.1/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clock.o ../Clock/clock.cpp
+
+qrc_img2.o: qrc_img2.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_img2.o qrc_img2.cpp
 
 moc_clock.o: moc_clock.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_clock.o moc_clock.cpp

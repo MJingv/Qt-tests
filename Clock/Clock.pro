@@ -27,3 +27,6 @@ SOURCES += main.cpp\
         clock.cpp
 
 HEADERS  += clock.h
+
+RESOURCES += \
+    img2.qrc

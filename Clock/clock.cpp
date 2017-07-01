@@ -6,11 +6,14 @@
 #include <QRect>
 #include <QtMath>
 #include <QTime>
+#include <QDebug>
+
 
 Clock::Clock(QWidget *parent)
     : QWidget(parent)
 {
     resize(400,400);
+    pixmap.load(":/2.png");
 }
 
 Clock::~Clock()
@@ -29,9 +32,9 @@ void Clock::paintEvent(QPaintEvent *)
     connect(&timer,SIGNAL(timeout()),this,SLOT(update()));
 
     //color
-    QColor hColor(Qt::black);
-    QColor mColor(Qt::blue);
-    QColor sColor(Qt::red);
+    QColor hColor("#000");
+    QColor mColor("#800000");
+    QColor sColor("#FF8000");
 
     //point (x,y,width,height)
     QRect hRect(-10,-3,55,6);
@@ -51,8 +54,12 @@ void Clock::paintEvent(QPaintEvent *)
 
     //draw the h-scale
     pen.setWidth(3);
+    pen.setCapStyle(Qt::RoundCap);
     pen.setColor(hColor);
     painter.setPen(pen);
+
+    //draw a background picture
+    painter.drawPixmap(20,20,80,80,pixmap);
 
     for(int i=0;i<12;i++)
     {
@@ -62,7 +69,8 @@ void Clock::paintEvent(QPaintEvent *)
 
     //draw the m-scale
     pen.setWidth(1);
-    pen.setColor(mColor);
+    pen.setCapStyle(Qt::RoundCap);
+    pen.setColor(sColor);
     painter.setPen(pen);
 
     for(int i=0;i<60;i++)
@@ -78,8 +86,12 @@ void Clock::paintEvent(QPaintEvent *)
 
     QTime time = QTime::currentTime();
 
-    //draw the h-scale
+    //draw the h-needle
+    pen.setWidth(5);
     pen.setColor(hColor);
+    pen.setStyle(Qt::DashDotLine);
+    //pen.setStyle( Qt::DashDotDotLine);
+    pen.setCapStyle(Qt::RoundCap);
     painter.setPen(pen);
     painter.setBrush(hColor);
     painter.save();
@@ -87,7 +99,7 @@ void Clock::paintEvent(QPaintEvent *)
     painter.drawRect(hRect);
     painter.restore();
 
-    //draw the m-scale
+    //draw the m-needle
     pen.setColor(mColor);
     painter.setPen(pen);
     painter.setBrush(mColor);
@@ -96,7 +108,7 @@ void Clock::paintEvent(QPaintEvent *)
     painter.drawRect(mRect);
     painter.restore();
 
-    //draw the s-scale
+    //draw the s-needle
     pen.setColor(sColor);
     painter.setPen(pen);
     painter.setBrush(sColor);
@@ -111,5 +123,35 @@ void Clock::paintEvent(QPaintEvent *)
     pen.setCapStyle(Qt::RoundCap);
     painter.setPen(pen);
     painter.drawPoint(0,0);
+
 }
 
+void Clock::keyPressEvent(QKeyEvent *e)
+{
+    if(e->key()==Qt::Key_A)
+    {
+        qDebug() << "key a was pressed";
+    }
+}
+
+void Clock::keyReleaseEvent(QKeyEvent *)
+{
+
+}
+
+void Clock::mousePressEvent(QMouseEvent *e)
+
+{
+    if(e->button() == Qt::LeftButton)
+    {
+        qDebug() << "left button was pressed";
+
+    }else {
+        qDebug() <<"right button was pressed";
+    }
+}
+
+void Clock::enterEvent(QEvent *)
+{
+    qDebug()<<"the mouse cursor enter";
+}

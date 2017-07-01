@@ -4,6 +4,9 @@
 #include <QWidget>
 #include <QPaintEvent>
 #include <QTimer>
+#include <QKeyEvent>
+#include <QMouseEvent>
+#include <QPixmap>
 
 class Clock : public QWidget
 {
@@ -14,8 +17,15 @@ public:
     ~Clock();
 protected:
     void paintEvent(QPaintEvent *);
+    void keyPressEvent(QKeyEvent *);
+    void keyReleaseEvent(QKeyEvent *);
+    void mousePressEvent(QMouseEvent *);
+    void enterEvent(QEvent *);
+
 private:
     QTimer timer;
+    QPixmap pixmap;
+
 };
 
 #endif // CLOCK_H
