@@ -6,3 +6,5 @@ some tests about Qt learning
 4.paint--some tests about 2D painting in qt
 5.textEditor--a simple example about text editor
 6.clock--an objective clock 
+7.sqlTest--to connect with sql
+8.serialPort--a port gui programmer
