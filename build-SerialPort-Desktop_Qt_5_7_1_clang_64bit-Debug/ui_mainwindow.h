@@ -44,10 +44,9 @@ public:
     QAction *actionExit;
     QAction *actionAbout;
     QWidget *centralWidget;
-    QGroupBox *groupBox_2;
+    QGroupBox *configGroupBox;
     QGridLayout *gridLayout;
     QLabel *label_2;
-    QPushButton *connectBtn;
     QLabel *label_6;
     QLabel *label_3;
     QComboBox *portComboBox;
@@ -60,7 +59,8 @@ public:
     QLabel *label_4;
     QComboBox *paritycomboBox;
     QSpacerItem *verticalSpacer;
-    QWidget *widget;
+    QPushButton *connectBtn;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_3;
     QGroupBox *groupBox;
     QVBoxLayout *verticalLayout;
@@ -104,7 +104,7 @@ public:
         actionRefresh = new QAction(MainWindow);
         actionRefresh->setObjectName(QStringLiteral("actionRefresh"));
         QIcon icon3;
-        icon3.addFile(QStringLiteral(":/img/paste.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon3.addFile(QStringLiteral(":/images/settings.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionRefresh->setIcon(icon3);
         actionClear = new QAction(MainWindow);
         actionClear->setObjectName(QStringLiteral("actionClear"));
@@ -118,79 +118,77 @@ public:
         actionExit->setIcon(icon5);
         actionAbout = new QAction(MainWindow);
         actionAbout->setObjectName(QStringLiteral("actionAbout"));
-        QIcon icon6;
-        icon6.addFile(QStringLiteral(":/images/settings.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionAbout->setIcon(icon6);
+        actionAbout->setIcon(icon3);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        groupBox_2 = new QGroupBox(centralWidget);
-        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
-        groupBox_2->setGeometry(QRect(250, 10, 221, 291));
-        gridLayout = new QGridLayout(groupBox_2);
+        configGroupBox = new QGroupBox(centralWidget);
+        configGroupBox->setObjectName(QStringLiteral("configGroupBox"));
+        configGroupBox->setGeometry(QRect(250, 10, 221, 291));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(6);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(configGroupBox->sizePolicy().hasHeightForWidth());
+        configGroupBox->setSizePolicy(sizePolicy);
+        gridLayout = new QGridLayout(configGroupBox);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        label_2 = new QLabel(groupBox_2);
+        label_2 = new QLabel(configGroupBox);
         label_2->setObjectName(QStringLiteral("label_2"));
 
         gridLayout->addWidget(label_2, 1, 0, 1, 1);
 
-        connectBtn = new QPushButton(groupBox_2);
-        connectBtn->setObjectName(QStringLiteral("connectBtn"));
-
-        gridLayout->addWidget(connectBtn, 7, 1, 1, 1);
-
-        label_6 = new QLabel(groupBox_2);
+        label_6 = new QLabel(configGroupBox);
         label_6->setObjectName(QStringLiteral("label_6"));
 
         gridLayout->addWidget(label_6, 5, 0, 1, 1);
 
-        label_3 = new QLabel(groupBox_2);
+        label_3 = new QLabel(configGroupBox);
         label_3->setObjectName(QStringLiteral("label_3"));
 
         gridLayout->addWidget(label_3, 2, 0, 1, 1);
 
-        portComboBox = new QComboBox(groupBox_2);
+        portComboBox = new QComboBox(configGroupBox);
         portComboBox->setObjectName(QStringLiteral("portComboBox"));
 
         gridLayout->addWidget(portComboBox, 0, 1, 1, 1);
 
-        stopBitscomboBox = new QComboBox(groupBox_2);
+        stopBitscomboBox = new QComboBox(configGroupBox);
         stopBitscomboBox->setObjectName(QStringLiteral("stopBitscomboBox"));
 
         gridLayout->addWidget(stopBitscomboBox, 4, 1, 1, 1);
 
-        label = new QLabel(groupBox_2);
+        label = new QLabel(configGroupBox);
         label->setObjectName(QStringLiteral("label"));
 
         gridLayout->addWidget(label, 0, 0, 1, 1);
 
-        baudcomboBox = new QComboBox(groupBox_2);
+        baudcomboBox = new QComboBox(configGroupBox);
         baudcomboBox->setObjectName(QStringLiteral("baudcomboBox"));
 
         gridLayout->addWidget(baudcomboBox, 1, 1, 1, 1);
 
-        proBeadlineEdit = new QLineEdit(groupBox_2);
+        proBeadlineEdit = new QLineEdit(configGroupBox);
         proBeadlineEdit->setObjectName(QStringLiteral("proBeadlineEdit"));
 
         gridLayout->addWidget(proBeadlineEdit, 5, 1, 1, 1);
 
-        label_5 = new QLabel(groupBox_2);
+        label_5 = new QLabel(configGroupBox);
         label_5->setObjectName(QStringLiteral("label_5"));
 
         gridLayout->addWidget(label_5, 4, 0, 1, 1);
 
-        datacomboBox = new QComboBox(groupBox_2);
+        datacomboBox = new QComboBox(configGroupBox);
         datacomboBox->setObjectName(QStringLiteral("datacomboBox"));
 
         gridLayout->addWidget(datacomboBox, 2, 1, 1, 1);
 
-        label_4 = new QLabel(groupBox_2);
+        label_4 = new QLabel(configGroupBox);
         label_4->setObjectName(QStringLiteral("label_4"));
 
         gridLayout->addWidget(label_4, 3, 0, 1, 1);
 
-        paritycomboBox = new QComboBox(groupBox_2);
+        paritycomboBox = new QComboBox(configGroupBox);
         paritycomboBox->setObjectName(QStringLiteral("paritycomboBox"));
 
         gridLayout->addWidget(paritycomboBox, 3, 1, 1, 1);
@@ -199,15 +197,25 @@ public:
 
         gridLayout->addItem(verticalSpacer, 7, 0, 1, 1);
 
-        widget = new QWidget(centralWidget);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(12, 15, 238, 281));
-        verticalLayout_3 = new QVBoxLayout(widget);
+        connectBtn = new QPushButton(configGroupBox);
+        connectBtn->setObjectName(QStringLiteral("connectBtn"));
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(connectBtn->sizePolicy().hasHeightForWidth());
+        connectBtn->setSizePolicy(sizePolicy1);
+
+        gridLayout->addWidget(connectBtn, 7, 1, 1, 1);
+
+        layoutWidget = new QWidget(centralWidget);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(12, 15, 238, 281));
+        verticalLayout_3 = new QVBoxLayout(layoutWidget);
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
-        groupBox = new QGroupBox(widget);
+        groupBox = new QGroupBox(layoutWidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
         verticalLayout = new QVBoxLayout(groupBox);
         verticalLayout->setSpacing(6);
@@ -247,7 +255,7 @@ public:
 
         verticalLayout_3->addWidget(groupBox);
 
-        groupBox_3 = new QGroupBox(widget);
+        groupBox_3 = new QGroupBox(layoutWidget);
         groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
         verticalLayout_2 = new QVBoxLayout(groupBox_3);
         verticalLayout_2->setSpacing(6);
@@ -322,16 +330,15 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "SerialPort", Q_NULLPTR));
         actionConnect->setText(QApplication::translate("MainWindow", "connect", Q_NULLPTR));
         actionDisconnect->setText(QApplication::translate("MainWindow", "disconnect", Q_NULLPTR));
         actionRefresh->setText(QApplication::translate("MainWindow", "refresh", Q_NULLPTR));
         actionClear->setText(QApplication::translate("MainWindow", "clear", Q_NULLPTR));
         actionExit->setText(QApplication::translate("MainWindow", "exit", Q_NULLPTR));
         actionAbout->setText(QApplication::translate("MainWindow", "hello", Q_NULLPTR));
-        groupBox_2->setTitle(QApplication::translate("MainWindow", "Config", Q_NULLPTR));
+        configGroupBox->setTitle(QApplication::translate("MainWindow", "Configure", Q_NULLPTR));
         label_2->setText(QApplication::translate("MainWindow", "Baud", Q_NULLPTR));
-        connectBtn->setText(QApplication::translate("MainWindow", "connect", Q_NULLPTR));
         label_6->setText(QApplication::translate("MainWindow", "ProBead", Q_NULLPTR));
         label_3->setText(QApplication::translate("MainWindow", "DataBits", Q_NULLPTR));
         stopBitscomboBox->clear();
@@ -369,6 +376,7 @@ public:
          << QApplication::translate("MainWindow", "Mark", Q_NULLPTR)
          << QApplication::translate("MainWindow", "Space", Q_NULLPTR)
         );
+        connectBtn->setText(QApplication::translate("MainWindow", "connect", Q_NULLPTR));
         groupBox->setTitle(QApplication::translate("MainWindow", "DisplayArea", Q_NULLPTR));
         rxCountLbl->setText(QApplication::translate("MainWindow", "RX:0", Q_NULLPTR));
         txCountLbl->setText(QApplication::translate("MainWindow", "TX:0", Q_NULLPTR));
@@ -379,6 +387,7 @@ public:
         sendBtn->setText(QApplication::translate("MainWindow", "Send", Q_NULLPTR));
         menuTools->setTitle(QApplication::translate("MainWindow", "Tools", Q_NULLPTR));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", Q_NULLPTR));
+        mainToolBar->setWindowTitle(QApplication::translate("MainWindow", "SerialPort", Q_NULLPTR));
     } // retranslateUi
 
 };

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QtSerialPort/QSerialPort>
+#include <QTimer>
 
 namespace Ui {
 class MainWindow;
@@ -22,11 +23,15 @@ private slots:
     void closePortSlot(void);
     void sendDataSlot(void);
     void recvDataSlot(void);
+    void refreshSlot(void);
+    void clearDisplaySlot(void);
 
 private:
     Ui::MainWindow *ui;
 
     QSerialPort     port;
+    QTimer          readTimer;
+
 
 };
 

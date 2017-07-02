@@ -31,5 +31,4 @@ HEADERS  += mainwindow.h
 FORMS    += mainwindow.ui
 
 RESOURCES += \
-    img.qrc \
     imgs.qrc

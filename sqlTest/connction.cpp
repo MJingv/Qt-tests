@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
 
     initializeModel(&model);
 
-    QTableView *view = createView(QObject::tr("Relational Table Model"), &model);
+    QTableView *view = createView(QObject::tr("Relational Table Model Test"), &model);
     view->show();
 
     return app.exec();

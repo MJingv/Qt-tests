@@ -49,12 +49,10 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../SerialPort/main.cpp \
-		../SerialPort/mainwindow.cpp qrc_img.cpp \
-		qrc_imgs.cpp \
+		../SerialPort/mainwindow.cpp qrc_imgs.cpp \
 		moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
-		qrc_img.o \
 		qrc_imgs.o \
 		moc_mainwindow.o
 DIST          = ../../Qt5.7.1/5.7/clang_64/mkspecs/features/spec_pre.prf \
@@ -388,7 +386,6 @@ Makefile: ../SerialPort/SerialPort.pro ../../Qt5.7.1/5.7/clang_64/mkspecs/macx-c
 		../../Qt5.7.1/5.7/clang_64/mkspecs/features/yacc.prf \
 		../../Qt5.7.1/5.7/clang_64/mkspecs/features/lex.prf \
 		../SerialPort/SerialPort.pro \
-		../SerialPort/img.qrc \
 		../SerialPort/imgs.qrc \
 		../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/QtGui.prl \
@@ -554,7 +551,6 @@ Makefile: ../SerialPort/SerialPort.pro ../../Qt5.7.1/5.7/clang_64/mkspecs/macx-c
 ../../Qt5.7.1/5.7/clang_64/mkspecs/features/yacc.prf:
 ../../Qt5.7.1/5.7/clang_64/mkspecs/features/lex.prf:
 ../SerialPort/SerialPort.pro:
-../SerialPort/img.qrc:
 ../SerialPort/imgs.qrc:
 ../../Qt5.7.1/5.7/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 ../../Qt5.7.1/5.7/clang_64/lib/QtGui.framework/QtGui.prl:
@@ -589,7 +585,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../SerialPort/img.qrc ../SerialPort/imgs.qrc $(DISTDIR)/
+	$(COPY_FILE) --parents ../SerialPort/imgs.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../SerialPort/mainwindow.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../SerialPort/main.cpp ../SerialPort/mainwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../SerialPort/mainwindow.ui $(DISTDIR)/
@@ -616,19 +612,9 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all: qrc_img.cpp qrc_imgs.cpp
+compiler_rcc_make_all: qrc_imgs.cpp
 compiler_rcc_clean:
-	-$(DEL_FILE) qrc_img.cpp qrc_imgs.cpp
-qrc_img.cpp: ../SerialPort/img.qrc \
-		../../Qt5.7.1/5.7/clang_64/bin/rcc \
-		../SerialPort/img/save.png \
-		../SerialPort/img/open.png \
-		../SerialPort/img/cut.png \
-		../SerialPort/img/copy.png \
-		../SerialPort/img/new.png \
-		../SerialPort/img/paste.png
-	/Users/majing/Qt5.7.1/5.7/clang_64/bin/rcc -name img ../SerialPort/img.qrc -o qrc_img.cpp
-
+	-$(DEL_FILE) qrc_imgs.cpp
 qrc_imgs.cpp: ../SerialPort/imgs.qrc \
 		../../Qt5.7.1/5.7/clang_64/bin/rcc \
 		../SerialPort/images/application-exit.png \
@@ -682,9 +668,6 @@ mainwindow.o: ../SerialPort/mainwindow.cpp ../SerialPort/mainwindow.h \
 		../../Qt5.7.1/5.7/clang_64/lib/QtSerialPort.framework/Headers/QSerialPortInfo \
 		../../Qt5.7.1/5.7/clang_64/lib/QtSerialPort.framework/Headers/qserialportinfo.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../SerialPort/mainwindow.cpp
-
-qrc_img.o: qrc_img.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_img.o qrc_img.cpp
 
 qrc_imgs.o: qrc_imgs.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_imgs.o qrc_imgs.cpp
